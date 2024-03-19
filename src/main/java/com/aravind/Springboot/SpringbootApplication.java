@@ -5,6 +5,7 @@ import com.aravind.Springboot.customer.CustomerDataServiceAccess;
 import com.aravind.Springboot.customer.CustomerService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class SpringbootApplication {
@@ -16,7 +17,11 @@ public class SpringbootApplication {
 				new CustomerService(new CustomerDataServiceAccess());
 		CustomerController customerController =
 				new CustomerController(customerService);*/
-		SpringApplication.run(SpringbootApplication.class, args);
+		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringbootApplication.class, args);
+	   String[] beanDefinitionName = applicationContext.getBeanDefinitionNames();
+		for (String s : beanDefinitionName) {
+			System.out.println(s);
+		}
 	}
 	}
 
