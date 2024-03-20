@@ -1,5 +1,6 @@
 package com.aravind.Springboot.customer;
 
+import com.aravind.Springboot.exception.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.Literal;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,7 @@ public class CustomerService    {
 
     public Customer getCustomers(Integer id) {
         return customerDao.selectCusotmerById(id)
-                .orElseThrow(() -> new IllegalArgumentException("customer with Id [%s] is not found".formatted(id)));
+                .orElseThrow(() -> new ResourceNotFound("customer with Id [%s] is not found".formatted(id)));
     }
 
 }
