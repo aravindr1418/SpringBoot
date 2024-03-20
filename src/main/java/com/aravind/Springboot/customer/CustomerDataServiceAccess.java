@@ -32,10 +32,10 @@ public class CustomerDataServiceAccess implements CustomerDao{
     }
 
     @Override
-    public Optional <Customer> selectCusotmerById(Integer id) {
-        return customers.stream().
-                filter(c -> c.getId().equals(id))
-                .findFirst();
+    public Optional<Customer> selectCusotmerById(Integer id) {
+        return customers.stream()
+                        .filter(c -> c.getId().equals(id))
+                         .findFirst();
 
     }
 }
