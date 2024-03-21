@@ -1,13 +1,14 @@
 package com.aravind.Springboot;
 
-import com.aravind.Springboot.customer.CustomerController;
-import com.aravind.Springboot.customer.CustomerDataServiceAccess;
-import com.aravind.Springboot.customer.CustomerService;
-import com.sun.tools.javac.Main;
+import com.aravind.Springboot.customer.Customer;
+import com.aravind.Springboot.customer.CustomerRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
+
 //import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 @SpringBootApplication
 public class SpringbootApplication {
@@ -20,7 +21,29 @@ public class SpringbootApplication {
 		CustomerController customerController =
 				new CustomerController(customerService);*/
 
-		SpringApplication.run(SpringbootApplication.class, args);
+		SpringApplication.run(SpringbootApplication.class, args);}
+        @Bean
+		CommandLineRunner runner(CustomerRepository customerRepository){
+			return args ->{
+				Customer Aravind = new Customer(
+						"Aravind",
+						"aravind@gmail.com",
+						23); 
+
+				Customer Aswin = new Customer(
+						"Aswin",
+						"aswin@gmail.com",
+						20);
+
+				Customer Meena = new Customer(
+						"Meena",
+						"meena@gmail.com",
+						45
+				);
+				List<Customer>customers=List.of(Aravind,Aswin,Meena);
+				customerRepository.saveAll(customers);
+			};
+
 
 	}
 
