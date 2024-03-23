@@ -22,39 +22,37 @@ public class SpringbootApplication {
 				new CustomerController(customerService);*/
 
 		SpringApplication.run(SpringbootApplication.class, args);}
-        @Bean
-		CommandLineRunner runner(CustomerRepository customerRepository){
-			return args ->{
-				Customer Aravind = new Customer(
-						"Aravind",
-						"aravind@gmail.com",
-						23); 
-
-				Customer Aswin = new Customer(
-						"Aswin",
-						"aswin@gmail.com",
-						20);
-
-				Customer Meena = new Customer(
-						"Meena",
-						"meena@gmail.com",
-						45
-				);
-				List<Customer>customers=List.of(Aravind,Aswin,Meena);
-				customerRepository.saveAll(customers);
-			};
+//        @Bean
+//		CommandLineRunner runner(CustomerRepository customerRepository){
+//			return args ->{
+//				Customer Aravind = new Customer(
+//						"Aravind",
+//						"aravind@gmail.com",
+//						23);
+//
+//				Customer Aswin = new Customer(
+//						"Aswin",
+//						"aswin@gmail.com",
+//						20);
+//
+//				Customer Meena = new Customer(
+//						"Meena",
+//						"meena@gmail.com",
+//						45
+//				);
+//				List<Customer>customers=List.of(Aravind,Aswin,Meena);
+//				customerRepository.saveAll(customers);
+//			};
 
 
 	}
 
-	@Bean
-	public Foo getFoo() {
-		return new Foo("bar");
-	}
 
-	record Foo(String name) {
-	}
-}
+//
+//	record Foo(String name) {
+//	}
+
+
 
 
 //	private static	void printBeans(ConfigurableApplicationContext ctx){
