@@ -39,7 +39,7 @@ public class CustomerController {
     public void deleteCustomer(
             @PathVariable("customerId")Integer customerId,
             @RequestBody CustomerUpdateRequest updateRequest){
-        customerService.updateCustomer(customerId.updateRequest);
+        customerService.updateCustomer(customerId,updateRequest);
     }
 
 
