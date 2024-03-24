@@ -6,17 +6,24 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
-@Component
+
 @Entity
+@Table(
+        name = "customer",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "customer_email_unique",columnNames = "email")
+        }
+)
 public class Customer {
     @Id
     @SequenceGenerator(
-            name = "customer_id_sequence",
-            sequenceName = "cusotmer_id_sequence"
+            name = "customer_id_seq1",
+            sequenceName = "customer_id_seq1",
+            allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_sequence"
+            generator = "customer_id_seq1"
     )
     private Integer id;
     @Column(
@@ -29,6 +36,7 @@ public class Customer {
     private String email;
     @Column(
             nullable = false
+
     )
     private Integer age;
 

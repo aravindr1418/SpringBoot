@@ -2,12 +2,15 @@ package com.aravind.Springboot;
 
 import com.aravind.Springboot.customer.Customer;
 import com.aravind.Springboot.customer.CustomerRepository;
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
+import java.util.Random;
 
 //import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 @SpringBootApplication
@@ -21,31 +24,30 @@ public class SpringbootApplication {
 		CustomerController customerController =
 				new CustomerController(customerService);*/
 
-		SpringApplication.run(SpringbootApplication.class, args);}
-//        @Bean
-//		CommandLineRunner runner(CustomerRepository customerRepository){
-//			return args ->{
-//				Customer Aravind = new Customer(
-//						"Aravind",
-//						"aravind@gmail.com",
-//						23);
-//
-//				Customer Aswin = new Customer(
-//						"Aswin",
-//						"aswin@gmail.com",
-//						20);
-//
-//				Customer Meena = new Customer(
-//						"Meena",
-//						"meena@gmail.com",
-//						45
-//				);
-//				List<Customer>customers=List.of(Aravind,Aswin,Meena);
-//				customerRepository.saveAll(customers);
-//			};
+		SpringApplication.run(SpringbootApplication.class, args);
+	}
+
+	@Bean
+	CommandLineRunner runner(CustomerRepository customerRepository) {
+		return args -> {
+			var faker = new Faker();
+			Random random = new Random();
+			Name name = faker.name();
+			String firstName = name.firstName();
+			String lastName = name.lastName();
+			Customer customer = new Customer(
+				firstName+" "+lastName,
+					firstName.toLowerCase()+"."+lastName.toLowerCase()+"@gmail.com",
+					random.nextInt(16,99)
+					);
+
+
+			customerRepository.save(customer);
+		};
 
 
 	}
+}
 
 
 //
