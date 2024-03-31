@@ -9,21 +9,21 @@ import java.util.Objects;
 
 @Entity
 @Table(
-        name = "customer",
+        name = "customer1",
         uniqueConstraints = {
-                @UniqueConstraint(name = "customer_email_unique",columnNames = "email")
+                @UniqueConstraint(name = "customer1_email_unique",columnNames = "email")
         }
 )
 public class Customer {
     @Id
     @SequenceGenerator(
-            name = "customer_id_seq1",
-            sequenceName = "customer_id_seq1",
+            name = "customer1_id_seq",
+            sequenceName = "customer1_id_seq",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "customer_id_seq1"
+            generator = "customer1_id_seq"
     )
     private Integer id;
     @Column(
@@ -32,6 +32,7 @@ public class Customer {
     private String name;
     @Column(
             nullable = false
+
     )
     private String email;
     @Column(

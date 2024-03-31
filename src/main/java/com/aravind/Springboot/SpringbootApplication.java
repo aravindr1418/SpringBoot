@@ -35,14 +35,14 @@ public class SpringbootApplication {
 			Name name = faker.name();
 			String firstName = name.firstName();
 			String lastName = name.lastName();
-			Customer customer = new Customer(
+			Customer customer1 = new Customer(
 				firstName+" "+lastName,
 					firstName.toLowerCase()+"."+lastName.toLowerCase()+"@gmail.com",
 					random.nextInt(16,99)
 					);
 
 
-			customerRepository.save(customer);
+			//customerRepository.save(customer1);
 		};
 
 
