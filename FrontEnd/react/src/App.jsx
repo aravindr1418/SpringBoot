@@ -1,86 +1,56 @@
-import UserProfile from "./UserProfile";
-import { useState , useEffect} from "react";
-    const users = [
-     {
-          name:"Aravind",
-          age:23,
-          gender:"MALE"
-     },
-     {
-          name:"Aswin",
-          age:43,
-          gender:"MALE"
-     },
-     {
-          name:"Meena",
-          age:45,
-          gender:"FEMALE"
-     },
-     {
-          name:"Savitha",
-          age:25,
-          gender:"FEMALE"
-     },
-     {
-          name:"Sabarishan",
-          age:49,
-          gender:"MALE"
-     },
-     {
-          name:"Palani",
-          age:76,
-          gender:"MALE"
-     },
-     {
-          name:"Rajendiran",
-          age:53,
-          gender:"MALE"
-     },
-    
-    ]
-    const UserProfiles = ({users})=>(
-     <div>
-   {   users.map((user,index)=>(
+import { Wrap,
+WrapItem,
+Spinner,
+Text} from '@chakra-ui/react'
+import SidebarWithHeader from './components/shared/sidebar';
+import {useEffect,useState } from 'react';
+import {getCustomers} from './services/client.js';
+import CardWithImage from './components/Card';
+import React from 'react';
+const App = ()=>{
 
-     <UserProfile  
-         key={index}
-         name = {user.name}
-         age = {user.age}
-         gender = {user.gender}
-         imageNumber = {index}
-         />
-   ))}
-           
-     </div>
-    )
-
-
-    function App(){
-     const [count,setCounter]=useState(0);
-     const [isLoading,setIsLoading]= useState(false);
-
+  const [customers,setCustomers] = useState([]);
+  const [Loading,setLoading] = useState(false);
      useEffect(()=>{
-         setIsLoading(true);
-         setTimeout(()=>{
-          setIsLoading(false);
-         },4000)
-         return ()=>{
-          console.log("cleanup functions")
-         }
+      setLoading(true);
+          getCustomers().then(res=>{
+             setCustomers(res.data);
+          }).catch(err=>{
+               console.log(err);
+          }).finally(()=>{
+          setLoading(false);
+          })
+
+
      },[])
-      if(isLoading){
-          return <h1>Loading wait for 4 seconds...</h1>
+      if(Loading){
+       return( <SidebarWithHeader>
+         <Spinner
+           thickness='4px'
+           speed='0.65s'
+           emptyColor='gray.200'
+           color='blue.500'
+           size='xl'
+         />
+         </SidebarWithHeader>)
+      }
+      if(customers.length<=0){
+      return(
+       <SidebarWithHeader>
+                <Text>No one is here.</Text>
+                </SidebarWithHeader>
+                )
       }
 
-    return ( 
-     <div>  
-          <button 
-          onClick={()=>setCounter(prevCounter=>prevCounter+1)}>
-               increment count</button>
-          <h1>{count}</h1>
-          <UserProfiles
-     users = {users}/>
-     </div>
-    )
+     return (
+          <SidebarWithHeader>
+          <Wrap justify = {"center"} spacing = {"30px"}>
+         {customers.map((customer,index)=>(
+         <WrapItem key = {index}>
+         <CardWithImage {...customer}/></WrapItem>
+         ))}</Wrap>
+          </SidebarWithHeader>
+     )
 }
-export default App
+
+export default App;
