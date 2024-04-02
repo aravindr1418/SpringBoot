@@ -2,7 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { ChakraProvider } from '@chakra-ui/react'
+import { createStandaloneToast } from '@chakra-ui/react'
 import './index.css'
+
+
+const { ToastContainer } = createStandaloneToast()
+
 
 ReactDOM.
 createRoot(document.getElementById('root'))
@@ -10,6 +15,7 @@ createRoot(document.getElementById('root'))
    <React.StrictMode>
     <ChakraProvider>
     <App />
+    <ToastContainer></ToastContainer>
     </ChakraProvider>
   </React.StrictMode>,
 )

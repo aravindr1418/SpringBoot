@@ -1,0 +1,2 @@
+ALTER TABLE customer1
+ADD COLUMN gender TEXT NOT NULL;
